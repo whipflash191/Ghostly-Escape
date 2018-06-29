@@ -15,12 +15,22 @@ public class GhostEditor : Editor {
     {
         GhostGameObject ghostGameObject = (GhostGameObject)target;
         base.OnInspectorGUI();
-        if (ghostGameObject.ghost.isPlayer == true)
+        if (ghostGameObject.ghost != null)
         {
-            if (GUILayout.Button("Make Player"))
+            if (ghostGameObject.ghost.isPlayer == true)
             {
-                ghostGameObject.MakePlayer();
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("Make Player"))
+                {
+                    ghostGameObject.MakePlayer();
+                }
+                if (GUILayout.Button("Set Sprite"))
+                {
+                    ghostGameObject.SetSprite();
+                }
+                GUILayout.EndHorizontal();
             }
-        } 
+        }
+
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Ghost", menuName = "Ghost")]
 public class NewGhostCharacter : ScriptableObject {
-    public Sprite ghost;
+    public Sprite ghostSprite;
     public bool isPlayer = false;
 	// Use this for initialization
 	void Start () {

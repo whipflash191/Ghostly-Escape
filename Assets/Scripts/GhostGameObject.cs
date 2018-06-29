@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class GhostGameObject : MonoBehaviour {
     public NewGhostCharacter ghost;
+    public bool hasSetPlayer = false;
 	// Use this for initialization
 	void Start () 
 	{
@@ -23,6 +24,20 @@ public class GhostGameObject : MonoBehaviour {
 
     public void MakePlayer()
     {
-        gameObject.AddComponent(typeof(PlayerControl));
+        if(hasSetPlayer == false)
+        {
+            gameObject.AddComponent(typeof(PlayerControl));
+            gameObject.AddComponent(typeof(AudioListener));
+            hasSetPlayer = true;
+        } else
+        {
+            Debug.Log("Ghost is Already Player!");
+        }
+    }
+
+    public void SetSprite()
+    {
+        SpriteRenderer attachedRenderer = GetComponent<SpriteRenderer>();
+        attachedRenderer.sprite = ghost.ghostSprite;
     }
 }

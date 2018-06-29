@@ -10,7 +10,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour {
     public bool canControl = true;
     [Range(0,4)]
-    public float movementSpeed;
+    public float movementSpeed = 4;
 	// Use this for initialization
 	void Start () 
 	{
