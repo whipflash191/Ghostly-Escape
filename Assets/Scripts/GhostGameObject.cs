@@ -7,16 +7,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Ghost", menuName = "Ghost")]
-public class Ghost : ScriptableObject {
-    public Sprite ghost;
+public class GhostGameObject : MonoBehaviour {
+    public NewGhostCharacter ghost;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		
 	}
+
+    public void MakePlayer()
+    {
+        gameObject.AddComponent(typeof(PlayerControl));
+    }
 }
