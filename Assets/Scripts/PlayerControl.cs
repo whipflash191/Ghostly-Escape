@@ -10,6 +10,8 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour {
     public bool canControl = true;
+    float h;
+    float v;
     [Range(0,4)]
     public float movementSpeed = 4;
 	// Use this for initialization
@@ -17,13 +19,16 @@ public class PlayerControl : MonoBehaviour {
 	{
 		
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
+
+    // Update is called once per frame
+    void Update()
+    {
+        h = CrossPlatformInputManager.GetAxis("Horizontal");
+        v = CrossPlatformInputManager.GetAxis("Vertical");
+
         if (canControl)
         {
-            transform.Translate(new Vector3(CrossPlatformInputManager.GetAxis("Horizontal"), CrossPlatformInputManager.GetAxis("Vertical"), 0) * Time.deltaTime * movementSpeed);
+            transform.Translate(new Vector3(h, v, 0) * Time.deltaTime * movementSpeed);
         }
-	}
+    }
 }
