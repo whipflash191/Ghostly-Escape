@@ -8,6 +8,7 @@ using UnityEditor;
 
 public class GhostGeneratorWindow : EditorWindow
 {
+    string ghostTag = "Ghosts";
     int ghostLayer = 0;
     string ghostName = "Replace This";
     Sprite ghostSprite = null;
@@ -34,6 +35,7 @@ public class GhostGeneratorWindow : EditorWindow
         ghostSprite = (Sprite)EditorGUILayout.ObjectField(ghostSprite, typeof(Sprite), false);
         ghostScale = EditorGUILayout.Vector3Field("Object Scale", ghostScale);
         ghostLayer = EditorGUILayout.LayerField("Object Layer", ghostLayer);
+        ghostTag = EditorGUILayout.TagField("Object Tag", ghostTag);
         isPrefab = EditorGUILayout.Toggle("Make Prefab", isPrefab, EditorStyles.toggle);
         isPlayer = EditorGUILayout.Toggle("Is Player", isPlayer, EditorStyles.toggle);
         if(isPlayer)
@@ -77,6 +79,7 @@ public class GhostGeneratorWindow : EditorWindow
             GameObject.DestroyImmediate(Selection.activeGameObject);
         }
         newGhost.layer = ghostLayer;
+        newGhost.tag = ghostTag;
         newGhost.AddComponent<SpriteRenderer>();
         newGhost.GetComponent<SpriteRenderer>().sprite = ghostSprite;
         newGhost.AddComponent<PolygonCollider2D>();
@@ -117,6 +120,7 @@ public class GhostGeneratorWindow : EditorWindow
 
     private void ResetFields()
     {
+        ghostTag = "Ghosts";
         ghostName = "Replace This";
         ghostLayer = 0;
         ghostSprite = null;

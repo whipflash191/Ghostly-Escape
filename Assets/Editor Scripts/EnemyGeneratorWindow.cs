@@ -9,7 +9,7 @@ using UnityEditor;
 
 public class EnemyGeneratorWindow : EditorWindow
 {
-    string enemyTag = "untagged";
+    string enemyTag = "Enemies";
     int enemyLayer = 0;
     int enemyWaypoints = 0;
     string enemyName = "Replace This";
@@ -22,7 +22,7 @@ public class EnemyGeneratorWindow : EditorWindow
     [MenuItem("Window/Enemy Generator")]
     public static void ShowWindow()
     {
-        EditorWindow.GetWindow<EnemyGeneratorWindow>("Ennemy Generator");
+        EditorWindow.GetWindow<EnemyGeneratorWindow>("Enemy Generator");
     }
 
     /*
@@ -36,6 +36,7 @@ public class EnemyGeneratorWindow : EditorWindow
         enemySprite = (Sprite)EditorGUILayout.ObjectField(enemySprite, typeof(Sprite), false);
         enemyScale = EditorGUILayout.Vector3Field("Object Scale", enemyScale);
         enemyLayer = EditorGUILayout.LayerField("Object Layer", enemyLayer);
+        enemyTag = EditorGUILayout.TagField("Object Tag", enemyTag);
         isPrefab = EditorGUILayout.Toggle("Make Prefab", isPrefab, EditorStyles.toggle);
         mvmSpeed = EditorGUILayout.Slider("Movement Speed", mvmSpeed, 0, 4);
         enemyWaypoints = EditorGUILayout.IntField("Waypoint to Generate", enemyWaypoints, EditorStyles.numberField);
@@ -71,6 +72,7 @@ public class EnemyGeneratorWindow : EditorWindow
             GameObject.DestroyImmediate(Selection.activeGameObject);
         }
         newEnemy.layer = enemyLayer;
+        newEnemy.tag = enemyTag;
         newEnemy.AddComponent<SpriteRenderer>();
         newEnemy.GetComponent<SpriteRenderer>().sprite = enemySprite;
         newEnemy.AddComponent<PolygonCollider2D>();
@@ -114,6 +116,7 @@ public class EnemyGeneratorWindow : EditorWindow
 
     private void ResetFields()
     {
+        enemyTag = "Enemies";
         enemyName = "Replace This";
         enemyWaypoints = 0;
         enemyScale = new Vector3(1, 1, 1);
