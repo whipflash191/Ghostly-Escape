@@ -88,6 +88,8 @@ public class GhostGeneratorWindow : EditorWindow
         {
             newGhost.AddComponent<PlayerControl>();
             newGhost.GetComponent<PlayerControl>().movementSpeed = mvmSpeed;
+            newGhost.AddComponent<Rigidbody2D>();
+            newGhost.GetComponent<Rigidbody2D>().isKinematic = true;
         }
         if(isPrefab)
         {
