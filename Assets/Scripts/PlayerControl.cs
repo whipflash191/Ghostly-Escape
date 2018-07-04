@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour {
     public bool canControl = true;
@@ -22,19 +23,7 @@ public class PlayerControl : MonoBehaviour {
 	{
         if (canControl)
         {
-            if (Input.GetKey(KeyCode.W))
-            {
-                transform.Translate(new Vector3(0, 1, 0) * (Time.deltaTime * movementSpeed));
-            } else if(Input.GetKey(KeyCode.S))
-            {
-                transform.Translate(new Vector3(0, -1, 0) * (Time.deltaTime * movementSpeed));
-            } else if(Input.GetKey(KeyCode.A))
-            {
-                transform.Translate(new Vector3(-1, 0, 0) * (Time.deltaTime * movementSpeed));
-            } else if(Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(new Vector3(1, 0, 0) * (Time.deltaTime * movementSpeed));
-            }
+            transform.Translate(new Vector3(CrossPlatformInputManager.GetAxis("Horizontal"), CrossPlatformInputManager.GetAxis("Vertical"), 0) * Time.deltaTime * movementSpeed);
         }
 	}
 }

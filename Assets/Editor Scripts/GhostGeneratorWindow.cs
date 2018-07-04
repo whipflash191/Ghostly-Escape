@@ -23,9 +23,13 @@ public class GhostGeneratorWindow : EditorWindow
         EditorWindow.GetWindow<GhostGeneratorWindow>("Ghost Generator");
     }
 
+    /*
+     * This chunk of code defines the editor layout
+     */
+
     private void OnGUI()
     {
-        ghostName = EditorGUILayout.TextField("Ghost Prefab Name", ghostName, EditorStyles.textField);
+        ghostName = EditorGUILayout.TextField("Ghost Name", ghostName, EditorStyles.textField);
         DuplicateCheck();
         ghostSprite = (Sprite)EditorGUILayout.ObjectField(ghostSprite, typeof(Sprite), false);
         ghostScale = EditorGUILayout.Vector3Field("Object Scale", ghostScale);
@@ -54,6 +58,8 @@ public class GhostGeneratorWindow : EditorWindow
             ResetFields();
         }
         EditorGUILayout.EndHorizontal();
+        EditorGUILayout.LabelField("To set the spawn position create an empty game object and select it in the editor. If no object is selected Ghost will spawn at 0, 0, 0,", EditorStyles.boldLabel);
+        EditorStyles.boldLabel.wordWrap = true;
     }
 
     private void MakeGhost()
@@ -65,6 +71,11 @@ public class GhostGeneratorWindow : EditorWindow
         */
         GameObject newGhost = new GameObject(ghostName);
         newGhost.transform.localScale = ghostScale;
+        if(Selection.activeGameObject != null)
+        {
+            newGhost.transform.position = Selection.activeGameObject.transform.position;
+            GameObject.DestroyImmediate(Selection.activeGameObject);
+        }
         newGhost.layer = ghostLayer;
         newGhost.AddComponent<SpriteRenderer>();
         newGhost.GetComponent<SpriteRenderer>().sprite = ghostSprite;

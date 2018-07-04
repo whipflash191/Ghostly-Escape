@@ -3,14 +3,13 @@
 * https://twitter.com/Whipflash191
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor;
 
 public class EnemyGeneratorWindow : EditorWindow
 {
+    string enemyTag = "untagged";
     int enemyLayer = 0;
     int enemyWaypoints = 0;
     string enemyName = "Replace This";
@@ -26,6 +25,10 @@ public class EnemyGeneratorWindow : EditorWindow
         EditorWindow.GetWindow<EnemyGeneratorWindow>("Ennemy Generator");
     }
 
+    /*
+    * This chunk of code defines the editor layout
+    */
+
     private void OnGUI()
     {
         enemyName = EditorGUILayout.TextField("Enemy Name", enemyName, EditorStyles.textField);
@@ -35,6 +38,7 @@ public class EnemyGeneratorWindow : EditorWindow
         enemyLayer = EditorGUILayout.LayerField("Object Layer", enemyLayer);
         isPrefab = EditorGUILayout.Toggle("Make Prefab", isPrefab, EditorStyles.toggle);
         mvmSpeed = EditorGUILayout.Slider("Movement Speed", mvmSpeed, 0, 4);
+        enemyWaypoints = EditorGUILayout.IntField("Waypoint to Generate", enemyWaypoints, EditorStyles.numberField);
         EditorGUILayout.BeginHorizontal();
         EditorGUI.BeginDisabledGroup(canMake == false);
         if (GUILayout.Button("Make Enemy"))
@@ -47,6 +51,8 @@ public class EnemyGeneratorWindow : EditorWindow
             ResetFields();
         }
         EditorGUILayout.EndHorizontal();
+        EditorGUILayout.LabelField("To set the spawn position create an empty game object and select it in the editor. If no object is selected Enemy will spawn at 0, 0, 0,", EditorStyles.boldLabel);
+        EditorStyles.boldLabel.wordWrap = true;
     }
 
     private void MakeEnemy()
@@ -59,15 +65,21 @@ public class EnemyGeneratorWindow : EditorWindow
         */
         GameObject newEnemy = new GameObject(enemyName);
         newEnemy.transform.localScale = enemyScale;
+        if (Selection.activeGameObject != null)
+        {
+            newEnemy.transform.position = Selection.activeGameObject.transform.position;
+            GameObject.DestroyImmediate(Selection.activeGameObject);
+        }
         newEnemy.layer = enemyLayer;
         newEnemy.AddComponent<SpriteRenderer>();
         newEnemy.GetComponent<SpriteRenderer>().sprite = enemySprite;
         newEnemy.AddComponent<PolygonCollider2D>();
         newEnemy.AddComponent<NavMeshAgent>();
         newEnemy.GetComponent<NavMeshAgent>().speed = mvmSpeed;
-        for (int i = 0; i < enemyWaypoints; i++)
+        for (int i = 0; i <= enemyWaypoints; i++)
         {
             GameObject tempWaypoint = new GameObject("waypoint" + i.ToString());
+            tempWaypoint.transform.position = newEnemy.transform.position;
             tempWaypoint.transform.SetParent(newEnemy.transform);
         }
         if (isPrefab)
