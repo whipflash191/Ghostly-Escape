@@ -8,7 +8,7 @@ using UnityEditor;
 
 public class GhostGeneratorWindow : EditorWindow
 {
-    string ghostTag = "Ghosts";
+    string ghostTag = "Ghost";
     int ghostLayer = 0;
     string ghostName = "Replace This";
     Sprite ghostSprite = null;
@@ -83,6 +83,7 @@ public class GhostGeneratorWindow : EditorWindow
         newGhost.AddComponent<SpriteRenderer>();
         newGhost.GetComponent<SpriteRenderer>().sprite = ghostSprite;
         newGhost.AddComponent<PolygonCollider2D>();
+        newGhost.GetComponent<PolygonCollider2D>().isTrigger = true;
         if(isPlayer)
         {
             newGhost.AddComponent<PlayerControl>();
@@ -120,7 +121,7 @@ public class GhostGeneratorWindow : EditorWindow
 
     private void ResetFields()
     {
-        ghostTag = "Ghosts";
+        ghostTag = "Ghost";
         ghostName = "Replace This";
         ghostLayer = 0;
         ghostSprite = null;

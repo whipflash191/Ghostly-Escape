@@ -12,6 +12,8 @@ using UnityEditor;
 public class EnemyEditor : Editor
 {
     bool canDestroy = false;
+    bool haveSetWaypoints = false;
+
     public override void OnInspectorGUI()
     {
         EnemyControl enemy = (EnemyControl)target;
@@ -20,12 +22,13 @@ public class EnemyEditor : Editor
         if(GUILayout.Button("Set Waypoints"))
         {
             enemy.AssignWaypoints();
+            haveSetWaypoints = true;
         }
         if(GUILayout.Button("Clear Waypoint List"))
         {
             enemy.ResetWaypointList();
         }
-        if(enemy.waypoints.Count != 0)
+        if(enemy.waypoints.Count != 0 && haveSetWaypoints == true)
         {
             canDestroy = true;
         } else
@@ -38,6 +41,7 @@ public class EnemyEditor : Editor
         if(GUILayout.Button("Destroy Waypoint Objects"))
         {
             enemy.DestroyWaypoints();
+            haveSetWaypoints = false;
         }
         EditorGUI.EndDisabledGroup();
         if(GUILayout.Button("Create Waypoint Object"))
@@ -45,5 +49,7 @@ public class EnemyEditor : Editor
             enemy.CreateWaypoint();
         }
         EditorGUILayout.EndHorizontal();
+        EditorGUILayout.LabelField("When you have set the waypoint's position hit 'Destroy Waypoint Objects' to clear the empty objects from the scene", EditorStyles.boldLabel);
+        EditorStyles.boldLabel.wordWrap = true;
     }
 }

@@ -9,7 +9,7 @@ using UnityEditor;
 
 public class EnemyGeneratorWindow : EditorWindow
 {
-    string enemyTag = "Enemies";
+    string enemyTag = "Enemy";
     int enemyLayer = 0;
     int enemyWaypoints = 0;
     string enemyName = "Replace This";
@@ -116,7 +116,7 @@ public class EnemyGeneratorWindow : EditorWindow
 
     private void ResetFields()
     {
-        enemyTag = "Enemies";
+        enemyTag = "Enemy";
         enemyName = "Replace This";
         enemyWaypoints = 0;
         enemyScale = new Vector3(1, 1, 1);
