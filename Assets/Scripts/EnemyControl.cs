@@ -52,7 +52,7 @@ public class EnemyControl : MonoBehaviour
 
     public void DestroyWaypoints()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i <= transform.childCount; i++)
         {
             GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
         }
