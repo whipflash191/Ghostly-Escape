@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour {
@@ -36,7 +37,7 @@ public class PlayerControl : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("Player Collision works");
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
