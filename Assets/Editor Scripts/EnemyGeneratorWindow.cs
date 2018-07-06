@@ -40,6 +40,8 @@ public class EnemyGeneratorWindow : EditorWindow
         isPrefab = EditorGUILayout.Toggle("Make Prefab", isPrefab, EditorStyles.toggle);
         mvmSpeed = EditorGUILayout.Slider("Movement Speed", mvmSpeed, 0, 4);
         enemyWaypoints = EditorGUILayout.IntField("Waypoint to Generate", enemyWaypoints, EditorStyles.numberField);
+        EditorGUILayout.LabelField("To set the spawn position create an empty game object and select it in the editor. If no object is selected Enemy will spawn at 0, 0, 0,", EditorStyles.boldLabel);
+        EditorStyles.boldLabel.wordWrap = true;
         EditorGUILayout.BeginHorizontal();
         EditorGUI.BeginDisabledGroup(canMake == false);
         if (GUILayout.Button("Make Enemy"))
@@ -52,8 +54,7 @@ public class EnemyGeneratorWindow : EditorWindow
             ResetFields();
         }
         EditorGUILayout.EndHorizontal();
-        EditorGUILayout.LabelField("To set the spawn position create an empty game object and select it in the editor. If no object is selected Enemy will spawn at 0, 0, 0,", EditorStyles.boldLabel);
-        EditorStyles.boldLabel.wordWrap = true;
+
     }
 
     private void MakeEnemy()
