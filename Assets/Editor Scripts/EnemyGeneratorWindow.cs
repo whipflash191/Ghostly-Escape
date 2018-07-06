@@ -78,6 +78,7 @@ public class EnemyGeneratorWindow : EditorWindow
         newEnemy.AddComponent<PolygonCollider2D>();
         newEnemy.AddComponent<NavMeshAgent>();
         newEnemy.GetComponent<NavMeshAgent>().speed = mvmSpeed;
+        newEnemy.AddComponent<EnemyControl>();
         for (int i = 0; i < enemyWaypoints; i++)
         {
             GameObject tempWaypoint = new GameObject("waypoint" + i.ToString());
