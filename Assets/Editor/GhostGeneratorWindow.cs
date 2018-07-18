@@ -76,7 +76,6 @@ public class GhostGeneratorWindow : EditorWindow
         if(Selection.activeGameObject != null)
         {
             newGhost.transform.position = Selection.activeGameObject.transform.position;
-            GameObject.DestroyImmediate(Selection.activeGameObject);
         }
         newGhost.layer = ghostLayer;
         newGhost.tag = ghostTag;
@@ -89,7 +88,9 @@ public class GhostGeneratorWindow : EditorWindow
             newGhost.AddComponent<PlayerControl>();
             newGhost.GetComponent<PlayerControl>().movementSpeed = mvmSpeed;
             newGhost.AddComponent<Rigidbody2D>();
-            newGhost.GetComponent<Rigidbody2D>().isKinematic = true;
+            newGhost.GetComponent<PlayerControl>().rb = newGhost.GetComponent<Rigidbody2D>();
+            newGhost.GetComponent<Rigidbody2D>().gravityScale = 0;
+            newGhost.GetComponent<Rigidbody2D>().freezeRotation = true;
         }
         if(isPrefab)
         {

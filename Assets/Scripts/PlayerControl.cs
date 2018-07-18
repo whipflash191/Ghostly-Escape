@@ -11,6 +11,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour {
     public bool canControl = true;
+    public Rigidbody2D rb;
     float h;
     float v;
     [Range(0,4)]
@@ -29,7 +30,8 @@ public class PlayerControl : MonoBehaviour {
 
         if (canControl)
         {
-            transform.Translate(new Vector3(h, v, 0) * Time.deltaTime * movementSpeed);
+            rb.velocity = new Vector2(Mathf.Lerp(0, (h * movementSpeed), 0.8f), Mathf.Lerp(0, (v * movementSpeed), 0.8f));
+           // transform.Translate(new Vector3(h, v, 0) * Time.deltaTime * movementSpeed);
         }
     }
 
