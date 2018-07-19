@@ -81,9 +81,10 @@ public class GhostGeneratorWindow : EditorWindow
         newGhost.tag = ghostTag;
         newGhost.AddComponent<SpriteRenderer>();
         newGhost.GetComponent<SpriteRenderer>().sprite = ghostSprite;
-        newGhost.AddComponent<PolygonCollider2D>();
-        newGhost.GetComponent<PolygonCollider2D>().isTrigger = true;
-        if(isPlayer)
+        newGhost.AddComponent<BoxCollider2D>();
+        newGhost.GetComponent<BoxCollider2D>().offset = new Vector2(0f, -0.12f);
+        newGhost.GetComponent<BoxCollider2D>().size = new Vector2(0.48f, 0.82f);
+        if (isPlayer)
         {
             newGhost.AddComponent<PlayerControl>();
             newGhost.GetComponent<PlayerControl>().movementSpeed = mvmSpeed;
