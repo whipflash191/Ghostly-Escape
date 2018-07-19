@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour {
+    public GameManager gm;
+    public bool gotKey = false;
     public bool canControl = true;
     public Rigidbody2D rb;
     float h;
@@ -19,7 +21,7 @@ public class PlayerControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 	}
 
     // Update is called once per frame
@@ -41,10 +43,23 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    public void OnCollisonEnter2D (Collision2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Enemy")
         {
+            SceneManager.LoadScene("GameOver");
+        }
+
+        if(col.gameObject.tag == "Key")
+        {
+            gm.keyUi.enabled = true;
+            gotKey = true;
+            Destroy(col.gameObject);
+        }
+
+        if(col.gameObject.tag == "Door" && gotKey == true)
+        {
+            //This is Temporary
             SceneManager.LoadScene("GameOver");
         }
     }
