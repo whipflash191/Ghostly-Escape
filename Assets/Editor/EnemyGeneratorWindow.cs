@@ -70,7 +70,6 @@ public class EnemyGeneratorWindow : EditorWindow
         if (Selection.activeGameObject != null)
         {
             newEnemy.transform.position = Selection.activeGameObject.transform.position;
-            GameObject.DestroyImmediate(Selection.activeGameObject);
         }
         newEnemy.layer = enemyLayer;
         newEnemy.tag = enemyTag;
