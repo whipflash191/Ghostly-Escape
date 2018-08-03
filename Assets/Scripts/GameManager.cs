@@ -10,11 +10,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
+    public Image keyUi;
     public Text timerText;
     float startTime;
 
 	void Start () 
 	{
+        keyUi.enabled = false;
         startTime = Time.time;
 	}
 	

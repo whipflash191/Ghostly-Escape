@@ -10,7 +10,10 @@ using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour {
+    public GameManager gm;
+    public bool gotKey = false;
     public bool canControl = true;
+    public Rigidbody2D rb;
     float h;
     float v;
     [Range(0,4)]
@@ -18,7 +21,7 @@ public class PlayerControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 	}
 
     // Update is called once per frame
@@ -29,14 +32,34 @@ public class PlayerControl : MonoBehaviour {
 
         if (canControl)
         {
-            transform.Translate(new Vector3(h, v, 0) * Time.deltaTime * movementSpeed);
+            rb.velocity = new Vector2(Mathf.Lerp(0, (h * movementSpeed), 0.8f), Mathf.Lerp(0, (v * movementSpeed), 0.8f));
+           // transform.Translate(new Vector3(h, v, 0) * Time.deltaTime * movementSpeed);
+        }
+        Vector2 moveDirection = rb.velocity;
+        if (moveDirection != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D col)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Enemy")
         {
+            SceneManager.LoadScene("GameOver");
+        }
+
+        if(col.gameObject.tag == "Key")
+        {
+            gm.keyUi.enabled = true;
+            gotKey = true;
+            Destroy(col.gameObject);
+        }
+
+        if(col.gameObject.tag == "Door" && gotKey == true)
+        {
+            //This is Temporary
             SceneManager.LoadScene("GameOver");
         }
     }
