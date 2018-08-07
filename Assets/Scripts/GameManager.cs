@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
+    public static float timerTime;
     public Image keyUi;
     public Text timerText;
     float startTime;
@@ -27,12 +28,12 @@ public class GameManager : MonoBehaviour
 
     public void LevelTimer()
     {
-        float t = Time.time - startTime;
-        int hours = (((int)t / 60) / 60);
-        int minutes = ((int)t / 60);
+        timerTime = Time.time - startTime;
+        int hours = (((int)timerTime / 60) / 60);
+        int minutes = ((int)timerTime / 60);
         string hoursString;
         string minutesString;
-        string secondsString = (t % 60).ToString("f2");
+        string secondsString = (timerTime % 60).ToString("f2");
         
         if(hours < 10)
         {
