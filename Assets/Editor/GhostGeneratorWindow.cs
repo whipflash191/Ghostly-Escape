@@ -72,6 +72,7 @@ public class GhostGeneratorWindow : EditorWindow
          * Adds compnents required & player scripts needed
          * Adds to player layer or sprite layer
         */
+        playerLight = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Lights/PlayerLight.prefab", typeof(GameObject));
         GameObject newGhost = new GameObject(ghostName);
         newGhost.transform.localScale = ghostScale;
         if(Selection.activeGameObject != null)

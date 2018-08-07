@@ -67,6 +67,8 @@ public class EnemyGeneratorWindow : EditorWindow
          * Adds waypoints used for the AI
          * Specifies Layer to add too
         */
+        footstep = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/Footstep.wav", typeof(AudioClip));
+        enemyLight = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Lights/EnemyLight.prefab", typeof(GameObject));
         GameObject newEnemy = new GameObject(enemyName);
         newEnemy.transform.localScale = enemyScale;
         if (Selection.activeGameObject != null)
