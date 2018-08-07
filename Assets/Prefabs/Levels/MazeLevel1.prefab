@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 4145107737517926}
   - component: {fileID: 8195094280579557764}
   - component: {fileID: 3664157343052242082}
-  - component: {fileID: 114303869630117622}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -873,34 +872,6 @@ CompositeCollider2D:
       - {x: -33.5, y: 0.5}
       - {x: -6.5, y: 0.5}
   m_VertexDistance: 0.0005
---- !u!114 &114303869630117622
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1353878978374394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
 --- !u!19719996 &2113883505924076344
 TilemapCollider2D:
   m_ObjectHideFlags: 1
