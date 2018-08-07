@@ -6,11 +6,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor;
+using UnityEngine.Audio;
 
 public class EnemyGeneratorWindow : EditorWindow
 {
-    public GameObject enemyLight;
-    public AudioClip footstep;
+    GameObject enemyLight;
+    AudioClip footstep;
+    AudioMixerGroup footstepMixerGroup;
     string enemyTag = "Enemy";
     int enemyLayer = 0;
     int enemyWaypoints = 0;
@@ -69,6 +71,8 @@ public class EnemyGeneratorWindow : EditorWindow
         */
         footstep = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Audio/Footstep.wav", typeof(AudioClip));
         enemyLight = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Lights/EnemyLight.prefab", typeof(GameObject));
+        AudioMixer tempMixer = (AudioMixer)AssetDatabase.LoadAssetAtPath("Assets/Mixer/Master.mixer", typeof(AudioMixer));
+        footstepMixerGroup = tempMixer.FindMatchingGroups("Footsteps")[0];
         GameObject newEnemy = new GameObject(enemyName);
         newEnemy.transform.localScale = enemyScale;
         if (Selection.activeGameObject != null)
@@ -96,6 +100,7 @@ public class EnemyGeneratorWindow : EditorWindow
         newEnemy.GetComponent<AudioSource>().maxDistance = 3.52f;
         newEnemy.GetComponent<AudioSource>().loop = true;
         newEnemy.GetComponent<AudioSource>().rolloffMode = AudioRolloffMode.Linear;
+        newEnemy.GetComponent<AudioSource>().outputAudioMixerGroup = footstepMixerGroup;
         for (int i = 0; i < enemyWaypoints; i++)
         {
             GameObject tempWaypoint = new GameObject("waypoint" + i.ToString());
