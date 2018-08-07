@@ -46,7 +46,7 @@ public class PlayerControl : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy")
         {
-            SceneManager.LoadScene("GameOver");
+            gm.GameOver();
         }
 
         if(col.gameObject.tag == "Key")
@@ -59,7 +59,7 @@ public class PlayerControl : MonoBehaviour {
         if(col.gameObject.tag == "Door" && gotKey == true)
         {
             //This is Temporary
-            SceneManager.LoadScene("GameOver");
+            gm.GameOver();
         }
     }
 }
