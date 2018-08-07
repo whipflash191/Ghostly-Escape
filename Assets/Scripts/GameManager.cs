@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 {
     public static bool newHighscore = false;
     public static float timerTime;
+    public bool isFinalLevel = false;
+    public string levelToLoad;
     public Image keyUi;
     public Text timerText;
     float startTime;
@@ -68,5 +70,16 @@ public class GameManager : MonoBehaviour
     {
         CheckHighscore();
         SceneManager.LoadScene("GameOver");
+    }
+
+    public void NextLevel()
+    {
+        if (isFinalLevel)
+        {
+            GameOver();
+        } else
+        {
+            SceneManager.LoadScene(levelToLoad);
+        }
     }
 }

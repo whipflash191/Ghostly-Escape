@@ -58,8 +58,7 @@ public class PlayerControl : MonoBehaviour {
 
         if(col.gameObject.tag == "Door" && gotKey == true)
         {
-            //This is Temporary
-            gm.GameOver();
+            gm.NextLevel();
         }
     }
 }
