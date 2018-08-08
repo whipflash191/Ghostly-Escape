@@ -7,10 +7,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
+    public static bool newHighscore = false;
     public static float timerTime;
+    public bool isFinalLevel = false;
+    public string levelToLoad;
     public Image keyUi;
     public Text timerText;
     float startTime;
@@ -51,5 +55,31 @@ public class GameManager : MonoBehaviour
         }
 
         timerText.text = (hoursString + ":" + minutesString + ":" + secondsString);
+    }
+
+    public void CheckHighscore()
+    {
+        if(timerTime - startTime > PlayerPrefs.GetFloat("Highscore"))
+        {
+            newHighscore = true;
+            PlayerPrefs.SetFloat("Highscore", (timerTime - startTime));
+        }
+    }
+
+    public void GameOver()
+    {
+        CheckHighscore();
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public void NextLevel()
+    {
+        if (isFinalLevel)
+        {
+            GameOver();
+        } else
+        {
+            SceneManager.LoadScene(levelToLoad);
+        }
     }
 }

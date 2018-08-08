@@ -48,7 +48,7 @@ public class StartMenu : MonoBehaviour {
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Level1");
     }
 
     public void SetQuality(int qualityIndex)
@@ -84,11 +84,14 @@ public class StartMenu : MonoBehaviour {
 
     public void LoadSettings()
     {
-        PlayerPrefs.GetString("CustomSettings");
-        PlayerPrefs.GetFloat("MasterVol");
-        PlayerPrefs.GetFloat("BackgroudVol");
-        PlayerPrefs.GetFloat("FootstepVol");
-        PlayerPrefs.GetInt("Quality");
+        master.value = PlayerPrefs.GetFloat("MasterVol");
+        mixer.SetFloat("masterVolume", PlayerPrefs.GetFloat("MasterVol"));
+        background.value = PlayerPrefs.GetFloat("BackgroudVol");
+        mixer.SetFloat("bgVolume", PlayerPrefs.GetFloat("BackgroudVol"));
+        footstep.value = PlayerPrefs.GetFloat("FootstepVol");
+        mixer.SetFloat("footstepVolume", PlayerPrefs.GetFloat("FootstepVol"));
+        quality.value = PlayerPrefs.GetInt("Quality");
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality"));
     }
 
 }
