@@ -13,6 +13,7 @@ public class StartMenu : MonoBehaviour {
      * This Script Controls the Start Menu
      * This includes a 'Settings' menu
      */
+    public string FirstLevelToLoad;
     public Slider master;
     public Slider footstep;
     public Slider background;
@@ -44,7 +45,7 @@ public class StartMenu : MonoBehaviour {
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(FirstLevelToLoad);
     }
 
     public void SetQuality(int qualityIndex)

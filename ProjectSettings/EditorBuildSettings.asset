@@ -9,20 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 37c852f34e2714c48a97fac25d03cae7
   - enabled: 1
-    path: Assets/Scenes/WorkingFiles/Maze 1.unity
-    guid: 907e7dfce9781c240abbc1a3686e1db0
+    path: Assets/Scenes/Levels/Maze 1.unity
+    guid: 6914d4e4bd7d01f4aa61dba1a093f963
   - enabled: 1
-    path: Assets/Scenes/WorkingFiles/Maze 2.unity
-    guid: 153a85a2f80a53b4da6199bafa66c415
+    path: Assets/Scenes/Levels/Maze 2.unity
+    guid: 286b85b1a2d64504596ed1a67ff2d6a0
   - enabled: 1
-    path: Assets/Scenes/WorkingFiles/Maze 3.unity
-    guid: 7289e731810cb6443b9a9f211689ba4a
+    path: Assets/Scenes/Levels/Maze 3.unity
+    guid: ec5e9e357f00d1a49a82fc5e0adf9173
   - enabled: 1
-    path: Assets/Scenes/WorkingFiles/Maze 4.unity
-    guid: 8f0bbc2af46672a45b32025dd8e34f25
+    path: Assets/Scenes/Levels/Maze 4.unity
+    guid: 7c6fcf1380c177c48ae8584749b399ab
   - enabled: 1
-    path: Assets/Scenes/WorkingFiles/Maze 5.unity
-    guid: a8287fc77bc7cf642910441b048f3fac
+    path: Assets/Scenes/Levels/Maze 5.unity
+    guid: 4d0ee49e950b0154da0117e06cfde05c
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: b7084419e68e8b54db045feb1bec8bc5
