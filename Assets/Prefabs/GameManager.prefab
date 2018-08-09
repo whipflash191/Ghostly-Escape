@@ -149,6 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFinalLevel: 0
-  levelToLoad: 
+  levelToLoad: Maze 3
   keyUi: {fileID: 0}
   timerText: {fileID: 0}
