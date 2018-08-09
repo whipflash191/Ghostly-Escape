@@ -11,6 +11,11 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
+    /* 
+     * Controls the pause menu
+     * Stops Gametime when "Paused"
+     * Has a copy of the 'Settings menu' from the "StartMenu" Script
+     */
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public string MenuScene;
@@ -47,7 +52,11 @@ public class PauseMenu : MonoBehaviour {
 
     public void SettingsMenu()
     {
-        LoadSettings();
+
+        if (PlayerPrefs.GetString("CustomSettings") == "true")
+        {
+            LoadSettings();
+        }
         pauseMenuUI.SetActive(false);
         settings.SetActive(true);
     }

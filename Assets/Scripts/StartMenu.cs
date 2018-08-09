@@ -3,14 +3,16 @@
 * https://twitter.com/Whipflash191
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour {
+    /*
+     * This Script Controls the Start Menu
+     * This includes a 'Settings' menu
+     */
     public Slider master;
     public Slider footstep;
     public Slider background;
@@ -27,12 +29,6 @@ public class StartMenu : MonoBehaviour {
             LoadSettings();
         }
         pressHere.speed = 0.4f;
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
 	}
     
     public void RevealSettings()

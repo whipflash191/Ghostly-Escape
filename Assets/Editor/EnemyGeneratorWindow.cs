@@ -10,6 +10,9 @@ using UnityEngine.Audio;
 
 public class EnemyGeneratorWindow : EditorWindow
 {
+    //Creates a Window used to Easily Generate new enimies
+    //Variables Used in Generation
+    //Edited through Editor Window (Window/Enemy Generator)
     GameObject enemyLight;
     AudioClip footstep;
     AudioMixerGroup footstepMixerGroup;
@@ -137,6 +140,7 @@ public class EnemyGeneratorWindow : EditorWindow
         }
     }
 
+    //Resets the fields in the Editor Window
     private void ResetFields()
     {
         enemyTag = "Enemy";

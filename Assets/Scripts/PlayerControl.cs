@@ -10,9 +10,9 @@ using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour {
-    public GameManager gm;
-    public bool gotKey = false;
-    public bool canControl = true;
+    GameManager gm;
+    bool gotKey = false;
+    bool canControl = true;
     public Rigidbody2D rb;
     float h;
     float v;
@@ -27,6 +27,10 @@ public class PlayerControl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        /*
+         * This handles player movement
+         * Uses the Unity Standard Asset, Cross Platform Input
+         */
         h = CrossPlatformInputManager.GetAxis("Horizontal");
         v = CrossPlatformInputManager.GetAxis("Vertical");
 
@@ -34,6 +38,8 @@ public class PlayerControl : MonoBehaviour {
         {
             rb.velocity = new Vector2(Mathf.Lerp(0, (h * movementSpeed), 0.8f), Mathf.Lerp(0, (v * movementSpeed), 0.8f));
         }
+
+        //Rotates the Player Sprite
         Vector2 moveDirection = rb.velocity;
         if (moveDirection != Vector2.zero)
         {

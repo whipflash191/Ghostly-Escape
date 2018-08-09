@@ -8,6 +8,9 @@ using UnityEditor;
 
 public class GhostGeneratorWindow : EditorWindow
 {
+    //Creates a Window used to Easily Generate new NPC Ghosts & Player Ghost
+    //Variables Used in Generation
+    //Edited through Editor Window (Window/Ghost Generator)
     public GameObject playerLight;
     string ghostTag = "Ghost";
     int ghostLayer = 0;
@@ -129,6 +132,7 @@ public class GhostGeneratorWindow : EditorWindow
         }
     }
 
+    //Resets Editor Window After Generation
     private void ResetFields()
     {
         ghostTag = "Ghost";

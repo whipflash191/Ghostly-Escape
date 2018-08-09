@@ -3,11 +3,14 @@
 * https://twitter.com/Whipflash191
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/*
+ * This Script Enables a custom inspector on Enemy Objects
+ * This script enables the user to easily set navigation waypoints
+ * Functions called are found in the "EnemyControl" Script
+ */
 [CustomEditor(typeof(EnemyControl))]
 public class EnemyEditor : Editor
 {

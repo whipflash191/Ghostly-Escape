@@ -11,6 +11,10 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour 
 {
+    /*
+     * Controls the GameOver Scene
+     * Loads Different Pannels depending on new highscore
+     */
     public GameObject gameOver;
     public GameObject newHighScore;
     public Text gameOverText;
@@ -38,6 +42,9 @@ public class GameOver : MonoBehaviour
 
     public void FormatTime(Text timerText)
     {
+        /*
+         * Used to Format Highscore Float into a time format of 00:00:00
+         */
         float temp = PlayerPrefs.GetFloat("Highscore");
         int hours = (((int)temp / 60) / 60);
         int minutes = ((int)temp / 60);
