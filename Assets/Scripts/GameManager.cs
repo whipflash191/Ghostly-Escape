@@ -11,6 +11,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
+    /*
+     * This Script Manages the Gameplay
+     * This includes The time, GameOver Scenario, & Checking Highscores
+     */
     public static bool newHighscore = false;
     public static float timerTime;
     public bool isFinalLevel = false;
@@ -32,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelTimer()
     {
+        //Formats & Displays the game timer
         timerTime = Time.time - startTime;
         int hours = (((int)timerTime / 60) / 60);
         int minutes = ((int)timerTime / 60);

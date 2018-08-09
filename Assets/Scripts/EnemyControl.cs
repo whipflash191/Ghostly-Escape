@@ -10,23 +10,31 @@ using UnityEngine.AI;
 
 public class EnemyControl : MonoBehaviour
 {
+    /*
+     * This Script Controls the Enemy NPCs
+     * It Also Contains the Functions Used in the "EnemyEditor" Script Used to Manage Nav Waypoints
+     * Waypoints are assigned to a list in the order they appear in the heirarchy
+     */
     [Range(0f, 4f)]
     public float movementSpeed;
+    public float waypointDelay = 2f;
+    public float waypointMinDistance = 0.2f;
     public Rigidbody2D rb;
     public List<Vector3> waypoints = new List<Vector3>();
-    public float pointDelay;
-    public int tempIndex;
+    float pointDelay;
+    int tempIndex;
     bool canWalk = true;
     public Vector3 currentWaypoint;
 
     void Start()
     {  
-        currentWaypoint = waypoints[0];
-        StartCoroutine(WalkCycle());
+        currentWaypoint = waypoints[0]; //Sets Starting Waypoint
+        StartCoroutine(WalkCycle()); //Starts WalkCycle
     }
 
     void Update()
     {
+        //Rotates Enemy Sprite
         Vector2 moveDirection = rb.velocity;
         if (moveDirection != Vector2.zero)
         {
@@ -37,6 +45,12 @@ public class EnemyControl : MonoBehaviour
 
     public void AssignWaypoints()
     {
+        /*
+         * Assigns Waypoints to List
+         * Assigned in the order they appear in the heirarchy
+         * Waypoints are spawned with the name "WaypointX" To make sorting easier on the user i.e "Waypoint 1, Waypoint 2 ETC"
+         * Rearange them in the heirarchy to represent this order
+         */
         if(transform.GetChild(0) != null)
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -51,11 +65,15 @@ public class EnemyControl : MonoBehaviour
 
     public void ResetWaypointList()
     {
-        waypoints.Clear();
+        waypoints.Clear(); //Clears the Current List
     }
 
     public void DestroyWaypoints()
     {
+        /*
+         * Used to destroy blank waypoint in the scene that are attached to the enemy GameObject
+         * Is Currently Bugged, May need to click multiple times
+         */
         for (int i = 0; i <= transform.childCount; i++)
         {
             GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
@@ -64,6 +82,7 @@ public class EnemyControl : MonoBehaviour
 
     public void CreateWaypoint()
     {
+        //Creates a new waypoint GameObject and spawns it as a child of this Enemy GameObject
         GameObject newWaypoint = new GameObject("waypoint" + transform.childCount.ToString());
         newWaypoint.transform.position = transform.position;
         newWaypoint.transform.SetParent(gameObject.transform);
@@ -73,7 +92,11 @@ public class EnemyControl : MonoBehaviour
     {
         while (canWalk)
         {
-            if (Vector3.Distance(transform.position, currentWaypoint) < 0.2f)
+            /*
+             * This walkcycle Coroutine checks the enemy distance from the currently assigned waypoint
+             * When its within a certain distance (0.2f in this case) waits a few seconds and switches to the next waypoint in the list
+             */
+            if (Vector3.Distance(transform.position, currentWaypoint) < waypointMinDistance)
             {
                 rb.velocity = new Vector2(0, 0);
                 tempIndex = waypoints.IndexOf(currentWaypoint);
@@ -84,12 +107,10 @@ public class EnemyControl : MonoBehaviour
                 {
                     currentWaypoint = waypoints[(tempIndex - 1)];
                 }
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(waypointDelay);
             } else
             {
                 rb.velocity = Vector3.Normalize((currentWaypoint - transform.position)) * movementSpeed;
-                //rb.velocity = Vector2.MoveTowards(transform.position, currentWaypoint, movementSpeed);
-                    //new Vector2(Mathf.Lerp(0, (currentWaypoint.x * movementSpeed), 0.8f), Mathf.Lerp(0, (currentWaypoint.y * movementSpeed), 0.8f));
             }
 
             yield return null;
