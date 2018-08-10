@@ -25,11 +25,15 @@ public class EnemyControl : MonoBehaviour
     int tempIndex;
     bool canWalk = true;
     public Vector3 currentWaypoint;
+    Animator animator;
 
     void Start()
-    {  
+    {
+        animator = GetComponent<Animator>();
         currentWaypoint = waypoints[0]; //Sets Starting Waypoint
         StartCoroutine(WalkCycle()); //Starts WalkCycle
+        animator.SetBool("idle", false);
+        animator.SetBool("walking", true);
     }
 
     void Update()
@@ -105,6 +109,8 @@ public class EnemyControl : MonoBehaviour
              */
             if (Vector3.Distance(transform.position, currentWaypoint) < waypointMinDistance)
             {
+                animator.SetBool("idle", true);
+                animator.SetBool("walking", false);
                 rb.velocity = new Vector2(0, 0);
                 tempIndex = waypoints.IndexOf(currentWaypoint);
                if (tempIndex != waypoints.Count -1 || tempIndex == 0)
@@ -115,6 +121,8 @@ public class EnemyControl : MonoBehaviour
                     currentWaypoint = waypoints[(tempIndex - 1)];
                 }
                 yield return new WaitForSeconds(waypointDelay);
+                animator.SetBool("idle", false);
+                animator.SetBool("walking", true);
             } else
             {
                 rb.velocity = Vector3.Normalize((currentWaypoint - transform.position)) * movementSpeed;
