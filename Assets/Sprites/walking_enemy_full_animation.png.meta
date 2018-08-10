@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: 2cca8ff2b7ea64a4aac077a24283f402
 TextureImporter:
   fileIDToRecycleName:
-    21300000: walking_enemy_full_animation_0
+    21300000: Enemy Default
     21300002: walking_enemy_full_animation_1
     21300004: walking_enemy_full_animation_2
     21300006: walking_enemy_full_animation_3
@@ -114,7 +114,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: walking_enemy_full_animation_0
+      name: Enemy Default
       rect:
         serializedVersion: 2
         x: 32
