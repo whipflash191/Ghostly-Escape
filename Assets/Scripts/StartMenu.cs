@@ -3,6 +3,7 @@
 * https://twitter.com/Whipflash191
 */
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
@@ -13,6 +14,7 @@ public class StartMenu : MonoBehaviour {
      * This Script Controls the Start Menu
      * This includes a 'Settings' menu
      */
+    public Animator sceneTransition;
     public string FirstLevelToLoad;
     public Slider master;
     public Slider footstep;
@@ -41,11 +43,12 @@ public class StartMenu : MonoBehaviour {
     public void RevealMenu()
     {
         menu.SetActive(true);
+        pressHere.gameObject.SetActive(false);
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene(FirstLevelToLoad);
+        StartCoroutine(StartGameTransition());
     }
 
     public void SetQuality(int qualityIndex)
@@ -91,4 +94,10 @@ public class StartMenu : MonoBehaviour {
         QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality"));
     }
 
+    IEnumerator StartGameTransition()
+    {
+        sceneTransition.SetTrigger("end");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(FirstLevelToLoad);
+    }
 }

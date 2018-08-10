@@ -15,6 +15,7 @@ public class GameOver : MonoBehaviour
      * Controls the GameOver Scene
      * Loads Different Pannels depending on new highscore
      */
+    public Animator sceneTransition;
     public GameObject gameOver;
     public GameObject newHighScore;
     public Text gameOverText;
@@ -74,8 +75,7 @@ public class GameOver : MonoBehaviour
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene("StartMenu");
-        GameManager.newHighscore = false;
+        StartCoroutine(LoadMenuTransition());
     }
 
     public void SaveInitials()
@@ -83,5 +83,13 @@ public class GameOver : MonoBehaviour
         PlayerPrefs.SetString("HighScoreInitial", initialsBox.text);
         newHighScore.SetActive(false);
         gameOver.SetActive(true);
+    }
+
+    IEnumerator LoadMenuTransition()
+    {
+        GameManager.newHighscore = false;
+        sceneTransition.SetTrigger("end");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("StartMenu");
     }
 }
