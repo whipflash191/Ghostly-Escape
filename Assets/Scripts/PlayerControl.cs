@@ -48,11 +48,25 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
+    IEnumerator GameOver()
+    {
+        gm.PlayLevelTransition();
+        yield return new WaitForSeconds(1.5f);
+        gm.GameOver();
+    }
+
+    IEnumerator NextLevel()
+    {
+        gm.PlayLevelTransition();
+        yield return new WaitForSeconds(1.5f);
+        gm.NextLevel();
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Enemy")
         {
-            gm.GameOver();
+            StartCoroutine(GameOver());
         }
 
         if(col.gameObject.tag == "Key")
@@ -64,7 +78,7 @@ public class PlayerControl : MonoBehaviour {
 
         if(col.gameObject.tag == "Door" && gotKey == true)
         {
-            gm.NextLevel();
+            StartCoroutine(NextLevel());
         }
     }
 }

@@ -15,18 +15,24 @@ public class GameManager : MonoBehaviour
      * This Script Manages the Gameplay
      * This includes The time, GameOver Scenario, & Checking Highscores
      */
+    public Animator levelTransition;
     public static bool newHighscore = false;
     public static float timerTime;
+    public bool isLevel1 = false;
     public bool isFinalLevel = false;
     public string levelToLoad;
     public Image keyUi;
     public Text timerText;
-    float startTime;
+    public static float startTime;
 
 	void Start () 
 	{
         keyUi.enabled = false;
-        startTime = Time.time;
+        if(isLevel1)
+        {
+            startTime = Time.time;
+        }
+        
 	}
 	
 	void Update () 
@@ -69,6 +75,11 @@ public class GameManager : MonoBehaviour
             newHighscore = true;
             PlayerPrefs.SetFloat("Highscore", (timerTime - startTime));
         }
+    }
+
+    public void PlayLevelTransition()
+    {
+        levelTransition.SetTrigger("end");
     }
 
     public void GameOver()
