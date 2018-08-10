@@ -107,6 +107,7 @@ public class EnemyGeneratorWindow : EditorWindow
         for (int i = 0; i < enemyWaypoints; i++)
         {
             GameObject tempWaypoint = new GameObject("waypoint" + i.ToString());
+            tempWaypoint.tag = "Waypoints";
             tempWaypoint.transform.position = newEnemy.transform.position;
             tempWaypoint.transform.SetParent(newEnemy.transform);
         }

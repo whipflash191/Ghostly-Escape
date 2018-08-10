@@ -55,7 +55,10 @@ public class EnemyControl : MonoBehaviour
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                waypoints.Add(transform.GetChild(i).transform.position);
+                if(transform.GetChild(i).tag == "Waypoints")
+                {
+                    waypoints.Add(transform.GetChild(i).transform.position);
+                }
             }
         } else
         {
@@ -76,7 +79,10 @@ public class EnemyControl : MonoBehaviour
          */
         for (int i = 0; i <= transform.childCount; i++)
         {
-            GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
+            if(transform.GetChild(i).tag == "Waypoinnts")
+            {
+                GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
+            }
         }
     }
 
@@ -84,6 +90,7 @@ public class EnemyControl : MonoBehaviour
     {
         //Creates a new waypoint GameObject and spawns it as a child of this Enemy GameObject
         GameObject newWaypoint = new GameObject("waypoint" + transform.childCount.ToString());
+        newWaypoint.tag = "Waypoints";
         newWaypoint.transform.position = transform.position;
         newWaypoint.transform.SetParent(gameObject.transform);
     }
