@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerControl : MonoBehaviour {
+    public GameObject speechBubble;
     GameManager gm;
     bool gotKey = false;
     bool canControl = true;
@@ -62,6 +63,13 @@ public class PlayerControl : MonoBehaviour {
         gm.NextLevel();
     }
 
+    IEnumerator DisableSpeechBubble()
+    {
+        speechBubble.GetComponent<Animator>().SetTrigger("end");
+        yield return new WaitForSeconds(1.5f);
+        speechBubble.SetActive(false);
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Enemy")
@@ -79,6 +87,17 @@ public class PlayerControl : MonoBehaviour {
         if(col.gameObject.tag == "Door" && gotKey == true)
         {
             StartCoroutine(NextLevel());
+        } else if (col.gameObject.tag == "Door" && gotKey != true)
+        {
+            speechBubble.SetActive(true);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Door" && gotKey != true)
+        {
+            StartCoroutine(DisableSpeechBubble());
         }
     }
 }
