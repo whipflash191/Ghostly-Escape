@@ -23,6 +23,7 @@ public class StartMenu : MonoBehaviour {
     public Animator pressHere;
     public GameObject settings;
     public GameObject menu;
+    public GameObject credits;
     public AudioMixer mixer;
 	// Use this for initialization
 	void Start () 
@@ -42,8 +43,12 @@ public class StartMenu : MonoBehaviour {
 
     public void RevealMenu()
     {
-        menu.SetActive(true);
+        if(credits.activeInHierarchy == true )
+        {
+            credits.SetActive(false);
+        }
         pressHere.gameObject.SetActive(false);
+        menu.SetActive(true);
     }
 
     public void StartGame()
@@ -69,6 +74,12 @@ public class StartMenu : MonoBehaviour {
     public void SetBackgroundVolume(float volume)
     {
         mixer.SetFloat("bgVolume", volume);
+    }
+
+    public void LoadCredits()
+    {
+        menu.SetActive(false);
+        credits.SetActive(true);
     }
 
     public void SaveSettings()
